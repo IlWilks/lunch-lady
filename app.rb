@@ -3,32 +3,38 @@ require_relative 'menu.rb'
 entree_choices = {
   message: "Welcome to lunch, here are our entrees:",
   options: ["Pizza", "Burrito", "Hamburger"],
+  prices:  [ 3.00 ,   4.00 ,     5.00      ]
 } 
 
 
 side_choices = {
   message: "Here are our side choices:",
   options: ["Mac and cheese", "Rice", "Corn", "tater tots"],
+  prices:  [ 3.00 ,            2.00 ,  3.50 ,  4.00       ]
 }
 
-entree_picked = "0"
+entree_picked = []
 sides_picked = []
+price_total = 0
+
 
 entree_menu = Menu.new(entree_choices)
 side_menu = Menu.new(side_choices)
-#total = Menu.new(entree_choices)
 
-#selects an entree
-# entree_menu.print
-# entree_picked = entree_menu.entree_selection
+#selects an entree and adds its price to total
+entree_menu.print
+entree_picked = entree_menu.entree_selection
+price_total += entree_picked[1]
 
-#selects 2 sides
+# #selects 2 sides
 side_menu.print
+# #currently manually running side_selection twice, can add logic to prompt user
 sides_picked.push(side_menu.side_selection)
-sides_picked.push(side_menu.side_selection)
-sides_picked.each do |x|
-  puts x
-end
+price_total += sides_picked[0][1]
+p price_total
+
+
+# puts price_total
 
 
 
