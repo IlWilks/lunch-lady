@@ -8,6 +8,9 @@ class Menu
     @menu = menu
   end
 
+  @@entree_choice 
+  @@side_choices = []
+
   def print
     #display menu options for entrees
     puts @menu [:message]
@@ -16,18 +19,47 @@ class Menu
     end
   end
 
-  def selection
-    #ask for user input 
+
+  #gets user input for entree choice, then assigns @@entree_choice to their selection
+  def entree_selection
     puts "Please select a value:"
     input = gets.strip
     selection = Integer(input)
-    puts selection
-    
+    #return the selection value and go to choosing side items/go to rescue if input is invalid
+    if (selection >= 1 && selection <= @menu[:options].size)
+      @@entree_choice = @menu[:options][selection - 1]
+      puts "Thanks, your choice is #{@@entree_choice} "
+      return selection
+
+    else
+      puts "Only enter numbers from 1 to #{@menu[:options].size}"
+      self.entree_selection
+    end
+
+    rescue ArgumentError
+      puts "Please select an integer"
+      self.entree_selection
+  end
 
 
+  def side_selection
+  #ask for user input
+  puts "Please select a value for your first side:"
+  input = gets.strip
+  selection = Integer(input)
+  if (selection >= 1 && selection <= @menu[:options].size)
+    @@side_choices.push(@menu[:options][selection - 1])
+    puts "Your sides are:"
+    @@side_choices.each do |x|
+      puts x
+    end
+  end
   
   rescue ArgumentError
     puts "Please select an integer"
+    self.side_selection
   end
+
+
 end
 

@@ -12,5 +12,10 @@ side_choices = {
 }
 
 entree_menu = Menu.new(entree_choices)
+side_menu = Menu.new(side_choices)
+
 entree_menu.print
-entree_menu.selection
+entree_menu.entree_selection
+
+side_menu.print
+side_menu.side_selection
