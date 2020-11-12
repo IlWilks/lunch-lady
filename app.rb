@@ -21,7 +21,6 @@ price_total = 0
 entree_menu = Menu.new(entree_choices)
 side_menu = Menu.new(side_choices)
 
-#selects an entree and adds its price to total
 entree_menu.print
 entree_picked = entree_menu.entree_selection
 price_total += entree_picked[1]
@@ -31,7 +30,14 @@ side_menu.print
 # #currently manually running side_selection twice, can add logic to prompt user
 sides_picked.push(side_menu.side_selection)
 price_total += sides_picked[0][1]
-p price_total
+side_menu.print
+sides_picked.push(side_menu.side_selection)
+price_total += sides_picked[0][1]
+puts "Your order is an entree of #{entree_picked[0]} with sides "
+sides_picked.each do |x, y|
+  puts x
+end
+puts "Your lunch total is: $#{price_total}"
 
 
 # puts price_total

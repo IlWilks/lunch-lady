@@ -8,9 +8,6 @@ class Menu
     @menu = menu
   end
 
-  @@entree_choice 
-  @@side_choice
-  @@total
 
   def print
     #display menu options for entrees
@@ -28,10 +25,10 @@ class Menu
     selection = Integer(input)
     #return the selection value and go to choosing side items/go to rescue if input is invalid
     if (selection >= 1 && selection <= @menu[:options].size)
-      @@entree_choice = @menu[:options][selection - 1]
-      @@total = @menu[:prices][selection-1]
+      entree_choice = @menu[:options][selection - 1]
+      total = @menu[:prices][selection-1]
       puts "Thanks, your choice is #{@menu[:options][selection - 1]} "
-      return @@entree_choice, @@total
+      return entree_choice, total
 
     else
       puts "Only enter numbers from 1 to #{@menu[:options].size}"
@@ -50,11 +47,10 @@ class Menu
   input = gets.strip
   selection = Integer(input)
   if (selection >= 1 && selection <= @menu[:options].size)
-    @@side_choice = @menu[:options][selection - 1]
-    @@total = @menu[:prices][selection-1]
+    side_choice = @menu[:options][selection - 1]
+    total = @menu[:prices][selection-1]
     puts "Your side is: #{@menu[:options][selection-1]}"
-    self.total_lunch(selection)
-    return @@side_choice, @@total
+    return side_choice, total
   else
     puts "Only enter numbers from 1 to #{@menu[:options].size}"
     self.side_selection
@@ -63,11 +59,6 @@ class Menu
   rescue ArgumentError
     puts "Please select an integer"
     self.side_selection
-  end
-
-  def total_lunch (selection)
-    @@total = @menu[:prices][selection-1]
-    return @@total
   end
 
 
