@@ -9,7 +9,7 @@ class Menu
   end
 
   @@entree_choice 
-  @@side_choices = []
+  @@side_choice
 
   def print
     #display menu options for entrees
@@ -28,8 +28,8 @@ class Menu
     #return the selection value and go to choosing side items/go to rescue if input is invalid
     if (selection >= 1 && selection <= @menu[:options].size)
       @@entree_choice = @menu[:options][selection - 1]
-      puts "Thanks, your choice is #{@@entree_choice} "
-      return selection
+      puts "Thanks, your choice is #{@menu[:options][selection - 1]} "
+      return @@entree_choice
 
     else
       puts "Only enter numbers from 1 to #{@menu[:options].size}"
@@ -44,21 +44,32 @@ class Menu
 
   def side_selection
   #ask for user input
-  puts "Please select a value for your first side:"
+  puts "Please select a value for your side:"
   input = gets.strip
   selection = Integer(input)
   if (selection >= 1 && selection <= @menu[:options].size)
-    @@side_choices.push(@menu[:options][selection - 1])
-    puts "Your sides are:"
-    @@side_choices.each do |x|
-      puts x
-    end
+    @@side_choice = @menu[:options][selection - 1]
+    puts "Your side is: #{@menu[:options][selection-1]}"
+    return @@side_choice
+  else
+    puts "Only enter numbers from 1 to #{@menu[:options].size}"
+    self.side_selection
   end
-  
+
   rescue ArgumentError
     puts "Please select an integer"
     self.side_selection
   end
+
+  # def total_lunch
+  #   #Repeat lunch selections, and total the order
+  #   puts "Your entree is: "
+  #   puts "#{@@entree_selection}"
+  #   puts "With sides of: "
+  #   @@side_choices.each do |x|
+  #     puts x
+  #   end
+  # end
 
 
 end
